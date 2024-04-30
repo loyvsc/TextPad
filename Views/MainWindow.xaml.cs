@@ -12,7 +12,7 @@ namespace TextPad.Views
         {
             InitializeComponent();
             DataContext = mainWindowViewModel;
-            mainWindowViewModel.Notes.Add(new Models.Note());
+            mainWindowViewModel.Notes.Add(new Models.Note() { Text= "123456789123456789123456789123456789123456789123456789" });
         }
     }
 }
