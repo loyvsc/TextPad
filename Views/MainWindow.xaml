@@ -3,83 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels="clr-namespace:TextPad.ViewModels"
-        xmlns:converters="clr-namespace:TextPad.Converters"
-        mc:Ignorable="d" Background="#FF3D3D"
-        d:DataContext="{d:DesignInstance {x:Type viewmodels:MainWindowViewModel}}"
+        xmlns:vm="clr-namespace:TextPad.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance {x:Type vm:MainWindowViewModel}}"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <converters:CutTextConverter x:Key="CutTextConverter"/>
-        <Style x:Key="BigBoldText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="32"/>
-            <Setter Property="FontWeight" Value="UltraBold"/>
-        </Style>
-        <Style TargetType="ListBox">
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-        <Style TargetType="ListBoxItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
-                  BorderBrush="{TemplateBinding Border.BorderBrush}"
-                  Background="{TemplateBinding Panel.Background}"
-                  Name="Bd" Margin="0" Padding="0"
-                  SnapsToDevicePixels="True">
-                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
-                               ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
-                               ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
-                               HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
-                               VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
-                               SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
-                                    <Condition Property="Selector.IsSelected" Value="True"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Panel.Background" TargetName="Bd" 
-                        Value="Transparent"/>
-                                <Setter Property="Border.BorderBrush" TargetName="Bd">
-                                    <Setter.Value>
-                                        <SolidColorBrush>#FFDADADA</SolidColorBrush>
-                                    </Setter.Value>
-                                </Setter>
-                            </MultiTrigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
-                                    <Condition Property="Selector.IsSelected" Value="True"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Panel.Background" TargetName="Bd" Value="Transparent"/>
-                                <Setter Property="Border.BorderBrush" TargetName="Bd">
-                                    <Setter.Value>
-                                        <SolidColorBrush>#FF26A0DA</SolidColorBrush>
-                                    </Setter.Value>
-                                </Setter>
-                            </MultiTrigger>
-                            <Trigger Property="UIElement.IsMouseOver" Value="True">
-                                <Setter Property="Panel.Background" TargetName="Bd" 
-                       Value="LightSteelBlue"/>
-                                <Setter Property="Border.BorderBrush" TargetName="Bd">
-                                    <Setter.Value>
-                                        <SolidColorBrush>#A826A0DA</SolidColorBrush>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="UIElement.IsEnabled" Value="False">
-                                <Setter Property="TextElement.Foreground" TargetName="Bd">
-                                    <Setter.Value>
-                                        <DynamicResource ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary Source="/Resources/Generic.xaml"></ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -87,30 +16,26 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="100px"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Background="White" Grid.RowSpan="2" Margin="0,0,0,0">
+        
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="File"></MenuItem>
+            <MenuItem Header="Edit"></MenuItem>
+            <MenuItem Header="View"></MenuItem>
+            <MenuItem Header="Note"></MenuItem>
+            <MenuItem Header="Window"></MenuItem>
+            <MenuItem Header="Tools"></MenuItem>
+            <MenuItem Header="Help"></MenuItem>
+        </Menu>
+        
+        <Grid Background="White" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50px"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="TextPad" Style="{StaticResource BigBoldText}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <ListBox ItemsSource="{Binding Notes}" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                     Background="Transparent">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="{Binding Name}"/>
-                            <TextBlock Grid.Row="1" Text="{Binding Text, Converter={StaticResource CutTextConverter}}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
         </Grid>
     </Grid>
 </Window>

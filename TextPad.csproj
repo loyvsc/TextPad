@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <StartupObject>TextPad.Program</StartupObject>
+    <StartupObject>TextPad.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Resources\ColorsDictionary.xaml">
+    <Page Update="Resources\GenericColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Converters\Converters.xaml">
       <Generator>MSBuild:Compile</Generator>
       <XamlRuntime>Wpf</XamlRuntime>
       <SubType>Designer</SubType>
