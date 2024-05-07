@@ -6,22 +6,15 @@
         xmlns:vm="clr-namespace:TextPad.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance {x:Type vm:MainWindowViewModel}}"
+        xmlns:controls="clr-namespace:TextPad.Controls"
         Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-        <ResourceDictionary Source="/Resources/Generic.xaml"></ResourceDictionary>
-    </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200px"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="100px"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+        <Menu Grid.Row="0">
             <MenuItem Header="File"></MenuItem>
             <MenuItem Header="Edit"></MenuItem>
             <MenuItem Header="View"></MenuItem>
@@ -31,11 +24,24 @@
             <MenuItem Header="Help"></MenuItem>
         </Menu>
         
-        <Grid Background="White" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Margin="0,0,0,0">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50px"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" MinWidth="250px" MaxWidth="350px"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Row="1">
+                <controls:DropdownButton Header="asd">
+                    <controls:DropdownButton.DropDownButtonItems>
+                        <controls:DropDownButtonItem Text="sdsdsd"/>
+                    </controls:DropdownButton.DropDownButtonItems>
+                </controls:DropdownButton>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
